@@ -2,6 +2,9 @@
 
 HOME=`pwd`
 
+# Install Virtualenv
+yum install python-virtualenv 
+
 # Setup virtual environment
 virtualenv .cf-ui
 source .cf-ui/bin/activate
@@ -20,9 +23,12 @@ then
     pip install setuptools --upgrade
 fi
 
-pip uninstall --yes pycurl
-export PYCURL_SSL_LIBRARY=nss
-pip install pycurl
+#pip uninstall --yes pycurl
+#export PYCURL_SSL_LIBRARY=nss
+#pip install pycurl
+
+## Requirement for Fedora 27 (https://github.com/siznax/wptools/issues/68)
+pip install --no-cache-dir --compile --ignore-installed --install-option="--with-openssl" pycurl
 
 pip install mgmtsystem==1.6.1
 
